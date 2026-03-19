@@ -84,7 +84,11 @@ trait HandlesBoundValues
 
         $cast = $model->getCasts()[$key] ?? null;
 
-        if (!$cast || $cast === 'date' || $cast === 'datetime') {
+        if (!$cast || $cast === 'date') {
+            return Carbon::instance($date)->toDateString();
+        }
+
+        if ($cast === 'datetime') {
             return Carbon::instance($date)->toJSON();
         }
 
